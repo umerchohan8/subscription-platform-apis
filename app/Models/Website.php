@@ -5,11 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Notifications\Notifiable;
 
-class User extends Model
+class Website extends Model
 {
-    use Notifiable, HasFactory;
+    use HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -19,8 +18,16 @@ class User extends Model
     protected $fillable = [
         'uuid',
         'name',
-        'email',
+        'url',
     ];
+
+    /**
+     * @return HasMany
+     */
+    public function posts(): HasMany
+    {
+        return $this->hasMany(Post::class);
+    }
 
     /**
      * @return HasMany
